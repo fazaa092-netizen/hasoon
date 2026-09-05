@@ -32,8 +32,8 @@ class OAuthService {
   constructor(private client: ReturnType<typeof axios.create>) {
     console.log("[OAuth] Initialized with baseURL:", ENV.oAuthServerUrl);
     if (!ENV.oAuthServerUrl) {
-      console.error(
-        "[OAuth] ERROR: OAUTH_SERVER_URL is not configured! Set OAUTH_SERVER_URL environment variable."
+      console.warn(
+        "[OAuth] OAUTH_SERVER_URL is not configured. Admin login is unavailable; the public visitor flow still works. Set OAUTH_SERVER_URL to enable OAuth."
       );
     }
   }
@@ -200,7 +200,6 @@ class SDKServer {
     cookieValue: string | undefined | null
   ): Promise<{ openId: string; appId: string; name: string } | null> {
     if (!cookieValue) {
-      console.warn("[Auth] Missing session cookie");
       return null;
     }
 

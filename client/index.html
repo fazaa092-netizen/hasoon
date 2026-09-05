@@ -16,10 +16,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script type="module">
+      // Inject the Umami analytics script only when configured, so an
+      // unconfigured dev environment doesn't emit Vite %VAR% warnings or
+      // request a non-existent /umami endpoint.
+      const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+      const analyticsWebsiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+      if (analyticsEndpoint && analyticsWebsiteId) {
+        const s = document.createElement("script");
+        s.defer = true;
+        s.src = `${analyticsEndpoint}/umami`;
+        s.setAttribute("data-website-id", analyticsWebsiteId);
+        document.body.appendChild(s);
+      }
+    </script>
   </body>
 
 </html>
