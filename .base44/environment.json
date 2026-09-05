@@ -1,0 +1,47 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "VITE_APP_ID",
+      "description": "Manus platform App ID (from the Manus app dashboard). Required for admin OAuth login.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_OAUTH_PORTAL_URL",
+      "description": "Manus OAuth portal base URL (e.g. https://oauth.manus.com). Required for admin login flow.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "OAUTH_SERVER_URL",
+      "description": "Manus OAuth server URL used by the backend to exchange tokens.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "OWNER_OPEN_ID",
+      "description": "The Manus openId of the app owner, auto-granted admin role on sign-in.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "BUILT_IN_FORGE_API_URL",
+      "description": "Manus Forge API base URL (for built-in LLM/image/map features).",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "BUILT_IN_FORGE_API_KEY",
+      "description": "Manus Forge API key (server-side). Needed for LLM, image generation, maps.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FRONTEND_FORGE_API_KEY",
+      "description": "Manus Forge API key exposed to the frontend (e.g. for Maps).",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FRONTEND_FORGE_API_URL",
+      "description": "Manus Forge API base URL exposed to the frontend.",
+      "requiredAtBoot": false
+    }
+  ]
+}
