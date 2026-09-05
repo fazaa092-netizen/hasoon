@@ -1,0 +1,1 @@
+ALTER TABLE `live_orders` ADD `bankName` varchar(120) DEFAULT '-' NOT NULL;

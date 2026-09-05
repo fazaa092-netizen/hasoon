@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1782640454660,
+      "tag": "0000_thankful_invaders",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1782644781489,
+      "tag": "0001_old_pestilence",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1782650443042,
+      "tag": "0002_workable_exodus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1782659239614,
+      "tag": "0003_overrated_silver_samurai",
+      "breakpoints": true
+    }
+  ]
+}

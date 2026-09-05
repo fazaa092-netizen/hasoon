@@ -1,0 +1,267 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  هوية فزعة — "العاج الذهبي"
+  لوحة: ذهبي ملكي (#C9A227) + أبيض عاجي (#FBF7EF) + أسود فحمي (#15120C)
+  خطوط: Tajawal/Cairo + Aref Ruqaa للكلمات التوقيعية
+*/
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-ink: var(--ink);
+  --font-display: "Tajawal", "Cairo", system-ui, sans-serif;
+  --font-body: "Cairo", "Tajawal", system-ui, sans-serif;
+  --font-elegant: "Aref Ruqaa", "Tajawal", serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+:root {
+  /* الذهبي ودرجاته */
+  --gold: oklch(0.74 0.13 84);          /* #C9A227 تقريبا */
+  --gold-light: oklch(0.86 0.11 88);    /* #E6C766 */
+  --gold-dark: oklch(0.62 0.12 78);     /* #B8881F */
+  --ink: oklch(0.18 0.012 70);          /* أسود فحمي دافئ */
+
+  --primary: oklch(0.74 0.13 84);
+  --primary-foreground: oklch(0.18 0.012 70);
+  --sidebar-primary: oklch(0.74 0.13 84);
+  --sidebar-primary-foreground: oklch(0.18 0.012 70);
+  --chart-1: oklch(0.74 0.13 84);
+  --chart-2: oklch(0.62 0.12 78);
+  --chart-3: oklch(0.45 0.02 70);
+  --chart-4: oklch(0.86 0.11 88);
+  --chart-5: oklch(0.32 0.015 70);
+  --radius: 0.9rem;
+
+  --background: oklch(0.985 0.006 85);  /* أبيض عاجي دافئ */
+  --foreground: oklch(0.18 0.012 70);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.012 70);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.012 70);
+  --secondary: oklch(0.96 0.012 85);
+  --secondary-foreground: oklch(0.3 0.015 70);
+  --muted: oklch(0.96 0.008 85);
+  --muted-foreground: oklch(0.52 0.018 75);
+  --accent: oklch(0.95 0.03 85);
+  --accent-foreground: oklch(0.22 0.012 70);
+  --destructive: oklch(0.55 0.21 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.015 85);
+  --input: oklch(0.9 0.015 85);
+  --ring: oklch(0.74 0.13 84);
+  --sidebar: oklch(0.18 0.012 70);
+  --sidebar-foreground: oklch(0.92 0.01 85);
+  --sidebar-accent: oklch(0.26 0.015 75);
+  --sidebar-accent-foreground: oklch(0.95 0.02 85);
+  --sidebar-border: oklch(0.3 0.02 75);
+  --sidebar-ring: oklch(0.74 0.13 84);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-feature-settings: "kern", "liga", "calt";
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; }
+  }
+
+  .font-elegant { font-family: var(--font-elegant); }
+
+  /* الهيدر الأسود الفاخر مع بريق ذهبي (يستخدمه الفوتر) */
+  .fazaa-header-bg {
+    background:
+      radial-gradient(circle at 20% center, rgba(201,162,39,0.10) 0, rgba(0,0,0,0) 35%),
+      radial-gradient(circle at 80% center, rgba(201,162,39,0.08) 0, rgba(0,0,0,0) 35%),
+      linear-gradient(135deg, #1c1810, #15120c 55%, #221d12);
+    position: relative;
+    overflow: hidden;
+  }
+  .fazaa-header-bg::before {
+    content: "";
+    pointer-events: none;
+    opacity: 0.7;
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 30%, rgba(230,199,102,0.5) 0, rgba(0,0,0,0) 1.5px),
+      radial-gradient(circle at 45% 70%, rgba(230,199,102,0.4) 0, rgba(0,0,0,0) 1.5px),
+      radial-gradient(circle at 75% 25%, rgba(230,199,102,0.45) 0, rgba(0,0,0,0) 1.5px),
+      radial-gradient(circle at 90% 60%, rgba(230,199,102,0.35) 0, rgba(0,0,0,0) 1.5px),
+      radial-gradient(circle at 30% 85%, rgba(230,199,102,0.4) 0, rgba(0,0,0,0) 1.5px);
+  }
+
+  /* الهيدر الذهبي الفاخر مع بريق أبيض (أعلى الصفحة) */
+  .fazaa-header-gold {
+    background:
+      radial-gradient(circle at 20% center, rgba(255,255,255,0.18) 0, rgba(255,255,255,0) 38%),
+      radial-gradient(circle at 80% center, rgba(255,255,255,0.12) 0, rgba(255,255,255,0) 38%),
+      linear-gradient(135deg, #E6C766 0%, #C9A227 52%, #B8881F 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .fazaa-header-gold::before {
+    content: "";
+    pointer-events: none;
+    opacity: 0.6;
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 30%, rgba(255,255,255,0.6) 0, rgba(255,255,255,0) 1.5px),
+      radial-gradient(circle at 45% 70%, rgba(255,255,255,0.5) 0, rgba(255,255,255,0) 1.5px),
+      radial-gradient(circle at 75% 25%, rgba(255,255,255,0.55) 0, rgba(255,255,255,0) 1.5px),
+      radial-gradient(circle at 90% 60%, rgba(255,255,255,0.45) 0, rgba(255,255,255,0) 1.5px),
+      radial-gradient(circle at 30% 85%, rgba(255,255,255,0.5) 0, rgba(255,255,255,0) 1.5px);
+  }
+
+  /* عنوان قسم بخط ذهبي تحته */
+  .fazaa-section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    display: inline-block;
+    position: relative;
+  }
+  .fazaa-section-title::after {
+    content: "";
+    background: linear-gradient(90deg, #C9A227, #E6C766);
+    border-radius: 2px;
+    width: 56px;
+    height: 3px;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+  }
+  .fazaa-section-title.center::after { right: 50%; transform: translateX(50%); }
+
+  .fazaa-gold-text {
+    background: linear-gradient(135deg, #C9A227, #E6C766 45%, #B8881F);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-gold {
+    color: #1c1810;
+    background: linear-gradient(135deg, #E6C766, #C9A227 55%, #B8881F);
+    border: 1px solid #B8881F;
+    transition: all 0.18s var(--ease-out);
+    box-shadow: 0 6px 18px -6px rgba(201,162,39,0.55);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #E8CC72, #D0AB2E 55%, #C0901F);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px -6px rgba(201,162,39,0.6);
+  }
+  .btn-gold:active { transform: scale(0.97); }
+
+  .btn-ink {
+    color: #FBF7EF;
+    background: linear-gradient(135deg, #221d12, #15120c);
+    border: 1px solid rgba(201,162,39,0.35);
+    transition: all 0.18s var(--ease-out);
+  }
+  .btn-ink:hover { transform: translateY(-1px); border-color: rgba(201,162,39,0.6); }
+  .btn-ink:active { transform: scale(0.97); }
+
+  .card-soft {
+    background: var(--card);
+    border: 1px solid oklch(0.9 0.015 85);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(20,16,8,0.04), 0 12px 32px -16px rgba(20,16,8,0.12);
+  }
+
+  .gold-ring { box-shadow: 0 0 0 1px rgba(201,162,39,0.35), 0 20px 50px -24px rgba(201,162,39,0.4); }
+
+  .fazaa-fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fazaaFadeUp 0.6s var(--ease-out) forwards;
+  }
+  @keyframes fazaaFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fazaa-fade-up { animation: none; opacity: 1; transform: none; }
+}
