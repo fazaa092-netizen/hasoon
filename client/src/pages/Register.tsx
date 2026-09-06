@@ -10,6 +10,9 @@ import { useOrder } from "@/contexts/OrderContext";
 export default function Register() {
   const { order, update } = useOrder();
   const [, navigate] = useLocation();
+  const fromFamilyApplication =
+    new URLSearchParams(window.location.search).get("from") === "family" &&
+    Boolean(order.fullName && order.phone && order.email && order.region);
   const [form, setForm] = useState({
     fullName: order.fullName,
     phone: order.phone,
@@ -60,6 +63,13 @@ export default function Register() {
           <h1 className="text-2xl font-extrabold text-foreground">طلب عضوية بطاقة فزعة</h1>
           <p className="mt-2 text-sm text-muted-foreground">املأ بياناتك لإكمال طلب عضويتك.</p>
         </div>
+
+        {fromFamilyApplication && (
+          <div className="register-prefill-note" role="status">
+            <strong>تم اعتماد بيانات المبادرة</strong>
+            <p>راجع البيانات المعبأة، وأضف رقم الهوية الإماراتية لإكمال الطلب. تم حفظ الإمارة المختارة للخطوة التالية.</p>
+          </div>
+        )}
 
         <form onSubmit={submit} className="card-soft p-7 space-y-5">
           <div>

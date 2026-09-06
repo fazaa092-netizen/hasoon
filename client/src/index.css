@@ -252,6 +252,56 @@
   .category-pagination button::before { content: ""; position: absolute; top: 50%; left: 50%; width: 7px; height: 7px; border-radius: 99px; background: rgba(18,33,46,.18); transform: translate(-50%, -50%); transition: width 180ms var(--ease-out), background-color 180ms var(--ease-out); }
   .category-pagination button.is-active::before { width: 24px; background: var(--gold); }
 
+  .family-banner-section { background: var(--ivory); border-bottom: 1px solid var(--line); }
+  .family-banner-frame { position: relative; display: grid; place-items: center; padding-block: clamp(3rem, 6vw, 5.5rem); }
+  .family-banner-frame::before { content: ""; position: absolute; width: min(90%, 880px); height: 64%; border: 1px solid rgba(200,156,40,.38); transform: translate(1.25rem, -1.25rem); }
+  [dir="ltr"] .family-banner-frame::before { transform: translate(-1.25rem, -1.25rem); }
+  .family-banner-frame img { position: relative; width: min(100%, 930px); height: auto; display: block; border: 8px solid white; box-shadow: 0 28px 70px -52px rgba(7,54,95,.65); }
+
+  .family-application-section { background: var(--paper); padding-block: clamp(4.5rem, 8vw, 7.5rem); }
+  .family-application-shell { max-width: 1160px; }
+  .family-application-heading { max-width: 860px; margin-inline: auto; text-align: center; }
+  .family-application-heading > span { color: var(--gold-dark); font-size: .68rem; font-weight: 900; letter-spacing: .12em; }
+  .family-application-heading h2 { margin-top: .75rem; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.15; font-weight: 740; }
+  .family-application-heading p { margin-top: 1.4rem; padding: 1.15rem 1.4rem; border: 1px solid rgba(18,33,46,.06); border-radius: .55rem; background: #faf9f6; color: var(--ink-soft); font-size: .86rem; line-height: 1.9; }
+  .family-application-heading strong { display: block; margin-top: .5rem; color: var(--blue); font-size: .78rem; }
+  .family-application-form { display: grid; gap: 1.6rem; margin-top: 2.4rem; }
+  .registration-instructions { border: 1px solid rgba(200,156,40,.8); border-radius: .35rem; background: var(--paper); }
+  .registration-instructions summary { min-height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 1.1rem; color: var(--ink); font-family: var(--font-display); font-size: 1rem; font-weight: 680; list-style: none; }
+  .registration-instructions summary::-webkit-details-marker { display: none; }
+  .registration-instructions summary svg { width: 18px; height: 18px; color: var(--ink-soft); transition: transform 180ms var(--ease-out); }
+  .registration-instructions[open] summary svg { transform: rotate(180deg); }
+  .registration-instructions ul { display: grid; gap: .65rem; padding: 0 1.1rem 1rem; border-top: 1px solid rgba(200,156,40,.18); }
+  .registration-instructions li { display: flex; align-items: flex-start; gap: .55rem; padding-top: .7rem; color: var(--ink-soft); font-size: .76rem; }
+  .registration-instructions li svg { flex: 0 0 15px; width: 15px; height: 15px; margin-top: .15rem; color: var(--gold-dark); }
+  .family-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .family-field-grid label { position: relative; display: grid; gap: .45rem; }
+  .family-field-grid label > span { color: var(--ink-soft); font-size: .68rem; font-weight: 650; }
+  .family-field-grid input, .family-field-grid select { width: 100%; min-height: 50px; padding-inline: .9rem; border: 1px solid rgba(200,156,40,.74) !important; border-radius: .3rem !important; background: white !important; color: var(--ink); font-size: .8rem; }
+  .family-tier-fieldset { min-width: 0; margin-top: .35rem; }
+  .family-tier-fieldset legend { width: 100%; margin-bottom: 1rem; text-align: center; color: var(--ink); font-family: var(--font-display); font-size: 1.25rem; font-weight: 720; }
+  .family-tier-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .family-tier-card { position: relative; overflow: hidden; display: grid; grid-template-rows: minmax(56px, auto) 1fr auto; min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: .55rem; background: white; box-shadow: 0 16px 36px -32px rgba(7,54,95,.5); transition: border-color 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out); }
+  .family-tier-card:hover { transform: translateY(-3px); border-color: rgba(200,156,40,.7); box-shadow: 0 22px 42px -30px rgba(157,116,17,.42); }
+  .family-tier-card.is-selected { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,156,40,.12), 0 22px 42px -30px rgba(157,116,17,.5); }
+  .family-tier-card > input { position: absolute; opacity: 0; pointer-events: none; }
+  .family-tier-eligibility { color: var(--ink); font-size: .72rem; font-weight: 680; line-height: 1.65; text-align: center; }
+  .family-tier-card > img { width: 100%; height: auto; display: block; align-self: center; margin-block: .45rem; filter: drop-shadow(0 12px 14px rgba(7,54,95,.1)); }
+  .family-tier-footer { min-height: 36px; display: flex; justify-content: space-between; align-items: center; gap: .6rem; }
+  .family-tier-footer > strong { color: var(--ink); font-size: .82rem; }
+  .family-tier-footer > span { border: 1px solid rgba(200,156,40,.7); border-radius: .3rem; padding: .25rem .55rem; color: var(--gold-dark); font-size: .67rem; font-weight: 800; }
+  .family-tier-card.is-selected .family-tier-footer > span { background: var(--gold); color: var(--ink); }
+  .family-benefits-note { display: flex; align-items: flex-start; gap: .85rem; padding: 1.1rem 1.25rem; border-radius: .55rem; background: #faf9f6; }
+  .family-benefits-note > svg { flex: 0 0 22px; width: 22px; height: 22px; color: var(--gold-dark); }
+  .family-benefits-note strong { display: block; color: var(--ink); font-size: .82rem; }
+  .family-benefits-note p { margin-top: .35rem; color: var(--ink-soft); font-size: .75rem; line-height: 1.8; }
+  .family-consent { display: flex; justify-content: center; align-items: flex-start; gap: .7rem; color: var(--ink-soft); font-size: .76rem; }
+  .family-consent input { flex: 0 0 auto; width: 16px; height: 16px; margin-top: .12rem; accent-color: var(--gold-dark); }
+  .family-submit { justify-self: center; min-width: 150px; }
+  .register-prefill-note { max-width: 672px; margin: 0 auto 1rem; padding: 1rem 1.15rem; border: 1px solid rgba(11,78,138,.16); border-radius: .75rem; background: var(--blue-soft); }
+  .register-prefill-note strong { display: block; color: var(--blue); font-size: .82rem; }
+  .register-prefill-note p { margin-top: .25rem; color: var(--ink-soft); font-size: .72rem; line-height: 1.7; }
+
   .journey-section { background: var(--paper); border-bottom: 1px solid var(--line); }
   .journey-layout { display: grid; grid-template-columns: .62fr 1.38fr; gap: 4rem; padding-block: clamp(3rem, 5vw, 4.7rem); }
   .journey-heading > span { color: var(--gold-dark); font-size: .7rem; font-weight: 900; letter-spacing: .08em; }
@@ -423,6 +473,17 @@
   .category-arrow-previous { inset-inline-start: .35rem; }
   .category-arrow-next { inset-inline-end: .35rem; }
   .category-pagination { margin-top: 1rem; }
+
+  .family-banner-frame { padding-block: 2.5rem; }
+  .family-banner-frame::before { display: none; }
+  .family-banner-frame img { width: 100%; border-width: 5px; }
+  .family-application-section { padding-block: 3.8rem; }
+  .family-application-heading p { padding: 1rem; font-size: .76rem; }
+  .family-field-grid, .family-tier-grid { grid-template-columns: 1fr; }
+  .family-tier-card { grid-template-columns: minmax(0, 1fr); padding: .9rem; }
+  .family-tier-card > img { max-width: 430px; margin-inline: auto; }
+  .family-consent { justify-content: flex-start; }
+  .family-submit { width: 100%; }
 
   .journey-layout { gap: 2rem; }
   .journey-list { grid-template-columns: 1fr; }

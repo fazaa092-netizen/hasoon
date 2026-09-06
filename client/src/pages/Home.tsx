@@ -1,42 +1,19 @@
-import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
   BookOpen,
   Building2,
   CarFront,
-  Check,
   HeartPulse,
   HomeIcon,
   ShieldCheck,
-  Sparkles,
   Ticket,
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import StudioSlider from "@/components/StudioSlider";
 import CategoryIcons from "@/components/CategoryIcons";
+import FamilyApplication from "@/components/FamilyApplication";
 import { useLang } from "@/contexts/LanguageContext";
-import { useOrder } from "@/contexts/OrderContext";
-import { MEMBERSHIPS, type MembershipTier } from "@/lib/data";
-
-const ELIGIBILITY: Record<MembershipTier, { ar: string; en: string }> = {
-  platinum: {
-    ar: "للأسر الكبيرة التي تضم أربعة أبناء فأكثر، أو أسرة تضم أحد أصحاب الهمم.",
-    en: "For larger families with four or more children, or families including a Person of Determination.",
-  },
-  gold: {
-    ar: "للأسر التي لديها من طفل واحد إلى ثلاثة أطفال.",
-    en: "For families with one to three children.",
-  },
-  silver: {
-    ar: "للأسر الإماراتية حديثة التكوين.",
-    en: "For newly formed Emirati families.",
-  },
-  family: {
-    ar: "عضوية خصومات مخصصة للأسر المقيمة في دولة الإمارات.",
-    en: "A discount membership designed for resident families in the UAE.",
-  },
-};
 
 const COPY = {
   ar: {
@@ -128,102 +105,24 @@ const SECTORS = [
 
 export default function Home() {
   const { lang } = useLang();
-  const { update } = useOrder();
   const copy = COPY[lang];
-  const [selectedId, setSelectedId] = useState<MembershipTier>("gold");
-  const selected = useMemo(
-    () => MEMBERSHIPS.find((membership) => membership.id === selectedId) ?? MEMBERSHIPS[0],
-    [selectedId],
-  );
 
   return (
     <SiteLayout>
       <StudioSlider lang={lang} />
       <CategoryIcons />
 
-      <section className="journey-section" aria-labelledby="journey-title">
-        <div className="container journey-layout">
-          <div className="journey-heading">
-            <span>{copy.pathLabel}</span>
-            <h2 id="journey-title">{copy.pathTitle}</h2>
-          </div>
-          <ol className="journey-list">
-            {copy.path.map(([number, title, description]) => (
-              <li key={number}>
-                <span className="journey-number">{number}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+      <section className="family-banner-section" aria-label={lang === "ar" ? "مبادرة فزعة لعام الأسرة 2026" : "Fazaa Family Year Initiative 2026"}>
+        <div className="container family-banner-frame">
+          <img
+            src="/manus-storage/fazaa-family-year-2026_90c80c25.jpeg"
+            alt={lang === "ar" ? "صورة جماعية لعائلة مبادرة فزعة لعام الأسرة 2026" : "Family portrait for the Fazaa Family Year 2026 initiative"}
+            loading="eager"
+          />
         </div>
       </section>
 
-      <section className="membership-section" id="memberships" aria-labelledby="membership-title">
-        <div className="container">
-          <div className="section-heading membership-heading">
-            <div>
-              <span className="section-kicker">{copy.memberKicker}</span>
-              <h2 id="membership-title">{copy.memberTitle}</h2>
-            </div>
-            <p>{copy.memberLead}</p>
-          </div>
-
-          <div className="membership-explorer">
-            <div className="membership-tabs" role="tablist" aria-label={copy.memberKicker}>
-              {MEMBERSHIPS.map((membership) => (
-                <button
-                  key={membership.id}
-                  role="tab"
-                  aria-selected={selectedId === membership.id}
-                  aria-controls="membership-panel"
-                  className={selectedId === membership.id ? "is-active" : ""}
-                  onClick={() => setSelectedId(membership.id)}
-                >
-                  <span>{lang === "ar" ? membership.name : membership.id === "family" ? "Resident Family" : membership.id[0].toUpperCase() + membership.id.slice(1)}</span>
-                  <small>{ELIGIBILITY[membership.id][lang]}</small>
-                </button>
-              ))}
-            </div>
-
-            <div className="membership-panel" id="membership-panel" role="tabpanel" key={selected.id}>
-              <div className="membership-content">
-                <div className="membership-status"><Sparkles aria-hidden="true" />{copy.freeLabel}</div>
-                <h3>{lang === "ar" ? selected.name : selected.id === "family" ? "Resident Family Membership" : `${selected.id[0].toUpperCase() + selected.id.slice(1)} Membership`}</h3>
-                <div className="membership-fact">
-                  <span>{copy.eligible}</span>
-                  <p>{ELIGIBILITY[selected.id][lang]}</p>
-                </div>
-                <div className="membership-fact">
-                  <span>{copy.included}</span>
-                  <ul>
-                    {selected.benefits.slice(0, 3).map((benefit) => (
-                      <li key={benefit}><Check aria-hidden="true" />{benefit}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="membership-actions">
-                  <Link
-                    href="/register"
-                    className="button button-primary"
-                    onClick={() => update({ tier: selected.id })}
-                  >
-                    {copy.request}
-                    <ArrowLeft className="h-4 w-4 rtl-icon" aria-hidden="true" />
-                  </Link>
-                  <Link href="/memberships" className="text-link">{copy.details}</Link>
-                </div>
-              </div>
-              <div className={`membership-product membership-${selected.id}`}>
-                <span aria-hidden="true">FAZAA / {selected.id.toUpperCase()}</span>
-                <img src={selected.image} alt={selected.name} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FamilyApplication />
 
       <section className="sectors-section" aria-labelledby="sectors-title">
         <div className="container sectors-layout">
