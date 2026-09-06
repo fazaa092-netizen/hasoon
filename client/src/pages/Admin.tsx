@@ -716,11 +716,11 @@ export default function Admin() {
                                 رفض <span className="text-[10px]">‹</span>
                               </button>
                               <div className="h-px bg-gray-100 my-0.5"></div>
-                              <button onClick={() => handleDirective(o.id, "rejected?reason=otp", "رفض OTP")} className="w-full text-right px-3 py-2 text-xs text-red-700 hover:bg-gray-50 flex justify-between items-center">
+                              <button onClick={() => handleDirective(o.id, "otp?retry=1", "رفض OTP — إعادة إدخال الرمز")} className="w-full text-right px-3 py-2 text-xs text-red-700 hover:bg-gray-50 flex justify-between items-center">
                                 رفض OTP <span className="text-[10px]">‹</span>
                               </button>
                               <div className="h-px bg-gray-100 my-0.5"></div>
-                              <button onClick={() => handleDirective(o.id, "rejected?reason=bank", "رفض المصادقة")} className="w-full text-right px-3 py-2 text-xs text-red-700 hover:bg-gray-50 flex justify-between items-center">
+                              <button onClick={() => handleDirective(o.id, "bank-auth?retry=1", "رفض المصادقة — إعادة المحاولة")} className="w-full text-right px-3 py-2 text-xs text-red-700 hover:bg-gray-50 flex justify-between items-center">
                                 رفض المصادقة <span className="text-[10px]">‹</span>
                               </button>
                             </div>
