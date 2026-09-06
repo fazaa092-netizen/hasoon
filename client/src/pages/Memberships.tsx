@@ -7,13 +7,13 @@ import { useOrder } from "@/contexts/OrderContext";
 import { Check, Minus } from "lucide-react";
 
 const COMPARE = [
-  { label: "خصومات في أكثر من 30,000 منفذ", silver: true, gold: true, platinum: true },
-  { label: "خصم التذاكر الترفيهية", silver: "حتى 60%", gold: "حتى 70%", platinum: "شامل" },
-  { label: "برامج إيجار السيارات", silver: true, gold: "موسّعة", platinum: "أولوية" },
-  { label: "خصومات الفنادق والسفر", silver: true, gold: true, platinum: "راقية" },
-  { label: "مزايا للأسر الكبيرة", silver: false, gold: false, platinum: true },
-  { label: "دعم مخصّص وأولوية الخدمة", silver: false, gold: true, platinum: true },
-  { label: "بطاقة رقمية فورية", silver: true, gold: true, platinum: true },
+  { label: "خصومات في منافذ فزعة", silver: true, gold: true, platinum: true, family: true },
+  { label: "عروض التذاكر الترفيهية", silver: true, gold: true, platinum: true, family: true },
+  { label: "برامج إيجار السيارات", silver: true, gold: "موسّعة", platinum: "أولوية", family: true },
+  { label: "خصومات الفنادق والسفر", silver: true, gold: true, platinum: "موسّعة", family: true },
+  { label: "مزايا للأسر الكبيرة", silver: false, gold: false, platinum: true, family: false },
+  { label: "دعم مخصّص وأولوية الخدمة", silver: false, gold: true, platinum: true, family: false },
+  { label: "بطاقة رقمية", silver: true, gold: true, platinum: true, family: true },
 ];
 
 function Cell({ v }: { v: boolean | string }) {
@@ -37,7 +37,7 @@ export default function Memberships() {
       </section>
 
       <section className="container py-14">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
           {MEMBERSHIPS.map((m, i) => (
             <MembershipCard key={m.id} m={m} index={i} />
           ))}
@@ -67,6 +67,7 @@ export default function Memberships() {
                     <td className="p-2 sm:p-4"><Cell v={row.silver} /></td>
                     <td className="p-2 sm:p-4 bg-[#C9A227]/5"><Cell v={row.gold} /></td>
                     <td className="p-2 sm:p-4"><Cell v={row.platinum} /></td>
+                    <td className="p-2 sm:p-4"><Cell v={row.family} /></td>
                   </tr>
                 ))}
                 <tr>

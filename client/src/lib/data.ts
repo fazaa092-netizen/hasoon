@@ -1,13 +1,13 @@
 // بيانات موقع فزعة (تجريبية للعرض)
 
 export const ASSETS = {
-  heroFamily: "/manus-storage/hero_family_d6e6e8cb.png",
-  logo: "/manus-storage/fazaa_logo_4b2062d9.jpg",
-  cardSilver: "/manus-storage/card_silver_new_e8f0bca9.jpg",
-  cardGold: "/manus-storage/card_gold_new_b57ef8f5.jpg",
-  cardPlatinum: "/manus-storage/card_platinum_new_3fd6f17f.jpg",
-  cardFamily: "/manus-storage/card_family_new_fabb1717.jpg",
-  pattern: "/manus-storage/pattern_gold_1cebd42b.jpg",
+  heroFamily: "/manus-storage/fazaa-family-year-2026_90c80c25.jpeg",
+  logo: "/manus-storage/fazaa-logo_36ff9cbd.png",
+  cardSilver: "/manus-storage/fazaa-silver_95b6e4e7.png",
+  cardGold: "/manus-storage/fazaa-gold_e088ab0e.png",
+  cardPlatinum: "/manus-storage/fazaa-platinum_65c898c0.png",
+  cardFamily: "/manus-storage/fazaa-discount_adc52c9f.png",
+  pattern: "/manus-storage/family-year-icon_41cb1299.svg",
 };
 
 export type MembershipTier = "silver" | "gold" | "platinum" | "family";
@@ -79,19 +79,19 @@ export const MEMBERSHIPS: Membership[] = [
   },
   {
     id: "family",
-    name: "بطاقة الأسرة",
-    tagline: "مزايا شاملة لجميع أفراد الأسرة",
+    name: "عضوية الأسر المقيمة",
+    tagline: "عضوية خصومات مخصصة للأسر المقيمة في دولة الإمارات",
     price: 400,
     priceLabel: "400 ر.س / سنوياً",
     image: ASSETS.cardFamily,
     accent: "#B8881F",
     benefits: [
-      "مزايا شاملة تغطّي جميع أفراد الأسرة.",
-      "خصوماتٌ عائلية في أكثر من 30,000 منفذٍ تجاري.",
-      "باقاتٌ ترفيهية وتعليمية للأبناء.",
-      "عروضٌ خاصة على السفر والفنادق للعائلات.",
-      "خدماتٌ صحية وتأمينية بأسعار تفضيلية.",
-      "بطاقاتٌ إضافية لأفراد الأسرة.",
+      "عضوية خصومات مخصصة للأسر المقيمة.",
+      "عروض مدعومة في التعليم والرعاية الصحية.",
+      "مزايا في النقل والترفيه والخدمات العائلية.",
+      "خصومات على المنتجات الغذائية والاستهلاكية الأساسية.",
+      "خدمات مختارة بأسعار تفضيلية ضمن المبادرة.",
+      "وصول إلى عروض فزعة المتجددة طوال العام.",
     ],
   },
 ];

@@ -1,45 +1,62 @@
-/* فوتر فزعة — خلفية سوداء فاخرة مع روابط السياسات والدعم */
 import { Link } from "wouter";
-import { ASSETS } from "@/lib/data";
+import { ArrowUpLeft, Mail, MapPin, Phone } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const content = lang === "ar"
+    ? {
+        about: "مبادرة اجتماعية تسعى إلى تعزيز الترابط والتضامن وتقديم أفضل الخدمات والمزايا للأعضاء وعائلاتهم.",
+        contact: "تواصل معنا",
+        links: "روابط سريعة",
+        locations: "أبوظبي · دبي · الشارقة",
+        official: "الموقع الرسمي لفزعة",
+        rights: "© 2026 فزعة. جميع الحقوق محفوظة.",
+      }
+    : {
+        about: "A social initiative strengthening community solidarity while delivering meaningful services and benefits to members and their families.",
+        contact: "Contact",
+        links: "Quick links",
+        locations: "Abu Dhabi · Dubai · Sharjah",
+        official: "Official Fazaa website",
+        rights: "© 2026 Fazaa. All rights reserved.",
+      };
+
   return (
-    <footer className="fazaa-header-bg border-t-4 border-[#C9A227] mt-20">
-      <div className="container relative z-10 py-14">
-        <div className="grid gap-10 md:grid-cols-3">
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={ASSETS.logo} alt="شعار فزعة" className="h-12 w-12 object-contain" />
-              <div>
-                <div className="font-elegant text-2xl fazaa-gold-text">فزعة</div>
-                <div className="text-[10px] tracking-[0.35em] text-[#E6C766]/70">F A Z A A</div>
-              </div>
-            </div>
-            <p className="text-sm text-white/70 leading-relaxed">
-              {t("footer.tagline")}
-            </p>
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <div className="footer-logo-row">
+            <img src="/manus-storage/fazaa-logo_36ff9cbd.png" alt="فزعة" />
+            <strong>{lang === "ar" ? "فزعة" : "FAZAA"}</strong>
           </div>
-
-          <div>
-            <h4 className="text-[#E6C766] font-bold mb-4">{t("footer.quickLinks")}</h4>
-            <ul className="space-y-2.5 text-sm text-white/75">
-              <li><Link href="/" className="hover:text-[#E6C766]">{t("nav.home")}</Link></li>
-              <li><Link href="/memberships" className="hover:text-[#E6C766]">{t("nav.memberships")}</Link></li>
-              <li><Link href="/benefits" className="hover:text-[#E6C766]">{t("nav.benefits")}</Link></li>
-              <li><Link href="/register" className="hover:text-[#E6C766]">{t("footer.requestMembership")}</Link></li>
-            </ul>
-          </div>
-
+          <p>{content.about}</p>
+          <a className="footer-official" href="https://www.fazaa.ae/" target="_blank" rel="noreferrer">
+            {content.official}<ArrowUpLeft aria-hidden="true" />
+          </a>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-[#C9A227]/20 flex items-center justify-center">
-          <p className="text-xs text-white/55">{t("footer.rights")}</p>
+        <div className="footer-column">
+          <h2>{content.links}</h2>
+          <Link href="/">{t("nav.home")}</Link>
+          <Link href="/memberships">{t("nav.memberships")}</Link>
+          <Link href="/benefits">{t("nav.benefits")}</Link>
+          <Link href="/register">{t("footer.requestMembership")}</Link>
         </div>
-        <p className="mt-4 text-center text-black" style={{ fontSize: "5px" }}>
-          {t("footer.security")}
-        </p>
+
+        <div className="footer-column footer-contact">
+          <h2>{content.contact}</h2>
+          <a href="tel:600520003"><Phone aria-hidden="true" /><span dir="ltr">600 520 003</span></a>
+          <a href="mailto:info@fazaa.ae"><Mail aria-hidden="true" />info@fazaa.ae</a>
+          <span><MapPin aria-hidden="true" />{content.locations}</span>
+        </div>
+      </div>
+      <div className="container footer-bottom">
+        <p>{content.rights}</p>
+        <div>
+          <a href="https://www.fazaa.ae/page/privacy-policy" target="_blank" rel="noreferrer">{lang === "ar" ? "سياسة الخصوصية" : "Privacy"}</a>
+          <a href="https://www.fazaa.ae/page/terms-and-conditions" target="_blank" rel="noreferrer">{lang === "ar" ? "الأحكام والشروط" : "Terms"}</a>
+        </div>
       </div>
     </footer>
   );
