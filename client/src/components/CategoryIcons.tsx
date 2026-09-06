@@ -1,15 +1,31 @@
-/* شريط أيقونات فئات فزعة — نظام عرض/تنقل بالأسهم مثل معرض الصور
-   يعرض مجموعة أيقونات في كل شريحة، أسهم دائرية + نقاط مؤشر */
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
+import type { LucideIcon } from "lucide-react";
 import {
-  ShoppingBasket, Stethoscope, GraduationCap, Shirt, Home, Bike,
-  Sparkles, HeartPulse, Salad, Users, Sofa, Utensils,
-  Ticket, Store, Waves, BadgePercent, UsersRound, Sun,
-  ChevronLeft, ChevronRight,
+  BadgePercent,
+  Bike,
+  ChevronLeft,
+  ChevronRight,
+  GraduationCap,
+  HeartPulse,
+  Home,
+  Salad,
+  Shirt,
+  ShoppingBasket,
+  Sofa,
+  Sparkles,
+  Stethoscope,
+  Store,
+  Sun,
+  Ticket,
+  Users,
+  UsersRound,
+  Utensils,
+  Waves,
 } from "lucide-react";
 import { useLang, type TransKey } from "@/contexts/LanguageContext";
 
-const CATS: { key: TransKey; icon: any }[] = [
+export const CATEGORY_ITEMS: { key: TransKey; icon: LucideIcon }[] = [
   { key: "cat.food", icon: ShoppingBasket },
   { key: "cat.medical", icon: Stethoscope },
   { key: "cat.education", icon: GraduationCap },
@@ -30,117 +46,126 @@ const CATS: { key: TransKey; icon: any }[] = [
   { key: "cat.summeroffers", icon: Sun },
 ];
 
-// تقسيم الفئات إلى شرائح حسب حجم الشاشة (يُعاد حسابه عند تغيير المقاس)
-function chunk<T>(arr: T[], size: number): T[][] {
-  const out: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
-  return out;
+export function chunkCategories<T>(items: T[], size: number): T[][] {
+  const groups: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    groups.push(items.slice(index, index + size));
+  }
+  return groups;
 }
 
-function usePerPage() {
-  const [per, setPer] = useState(3);
+function useCategoriesPerPage() {
+  const [perPage, setPerPage] = useState(6);
+
   useEffect(() => {
-    const calc = () => {
-      const w = window.innerWidth;
-      if (w < 640) setPer(3); // الجوال: 3 أيقونات
-      else setPer(6); // تابلت/كمبيوتر: 6 أيقونات في صف واحد
-    };
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
+    const calculate = () => setPerPage(window.innerWidth < 640 ? 3 : 6);
+    calculate();
+    window.addEventListener("resize", calculate);
+    return () => window.removeEventListener("resize", calculate);
   }, []);
-  return per;
+
+  return perPage;
 }
 
 export default function CategoryIcons() {
-  const { t } = useLang();
-  const per = usePerPage();
-  const pages = chunk(CATS, per);
-  const total = pages.length;
-  const [index, setIndex] = useState(0);
+  const { t, dir, lang } = useLang();
+  const perPage = useCategoriesPerPage();
+  const pages = chunkCategories(CATEGORY_ITEMS, perPage);
+  const [activePage, setActivePage] = useState(0);
+  const pointerStart = useRef<number | null>(null);
+  const totalPages = pages.length;
 
-  // ضبط المؤشر إن تغيّر عدد الصفحات بعد تغيير المقاس
   useEffect(() => {
-    setIndex((i) => Math.min(i, total - 1));
-  }, [total]);
+    setActivePage((current) => Math.min(current, totalPages - 1));
+  }, [totalPages]);
 
   const go = useCallback(
-    (dir: number) => setIndex((i) => (i + dir + total) % total),
-    [total]
+    (offset: number) => setActivePage((current) => (current + offset + totalPages) % totalPages),
+    [totalPages],
   );
 
+  const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      dir === "rtl" ? go(1) : go(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      dir === "rtl" ? go(-1) : go(1);
+    }
+  };
+
   return (
-    <section className="relative bg-secondary/40 border-b border-border/60">
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: "url(/manus-storage/pattern_gold_1cebd42b.jpg)", backgroundSize: "360px" }}
-      />
-      <div className="container relative z-10 py-8">
-
-        <div className="relative px-4 sm:px-14">
-          {/* الشرائح */}
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(${index * 100}%)` }}
-            >
-              {pages.map((page, pi) => (
-                <div key={pi} className="w-full shrink-0">
-                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-x-3 gap-y-7">
-                    {page.map((c, i) => (
-                      <button
-                        key={i}
-                        className="group flex flex-col items-center gap-2.5 text-center"
-                        aria-label={t(c.key)}
-                      >
-                        <span className="relative h-14 w-14 sm:h-20 sm:w-20 rounded-full bg-white border border-[#C9A227]/25 shadow-[0_6px_18px_rgba(21,18,12,0.08)] flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_12px_28px_rgba(201,162,39,0.25)] group-hover:border-[#C9A227]">
-                          <c.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#1f4e9c] transition-colors group-hover:text-[#B8881F]" strokeWidth={1.6} />
-                        </span>
-                        <span className="text-[10px] sm:text-xs font-semibold text-foreground/80 leading-tight max-w-[88px] group-hover:text-[#B8881F] transition-colors">
-                          {t(c.key)}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* الأسهم (تظهر فقط عند وجود أكثر من شريحة) */}
-          {total > 1 && (
-            <>
-              <button
-                onClick={() => go(-1)}
-                aria-label={t("nav.prev")}
-                className="absolute top-1/2 right-0 sm:right-2 -translate-y-1/2 h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white border border-[#C9A227]/30 hover:bg-[#C9A227] text-[#15120c] hover:text-white flex items-center justify-center shadow-lg transition active:scale-95 z-10"
-              >
-                <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
-              </button>
-              <button
-                onClick={() => go(1)}
-                aria-label={t("nav.next")}
-                className="absolute top-1/2 left-0 sm:left-2 -translate-y-1/2 h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white border border-[#C9A227]/30 hover:bg-[#C9A227] text-[#15120c] hover:text-white flex items-center justify-center shadow-lg transition active:scale-95 z-10"
-              >
-                <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* نقاط المؤشر */}
-        {total > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
-            {pages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                aria-label={`${t("nav.group")} ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${i === index ? "w-6 bg-[#C9A227]" : "w-2 bg-foreground/20 hover:bg-foreground/40"}`}
-              />
+    <section className="category-rail" aria-label={lang === "ar" ? "فئات مزايا فزعة" : "Fazaa benefit categories"} onKeyDown={onKeyDown}>
+      <div className="container category-shell">
+        <div
+          className="category-viewport"
+          onPointerDown={(event) => {
+            pointerStart.current = event.clientX;
+          }}
+          onPointerUp={(event) => {
+            if (pointerStart.current === null) return;
+            const delta = event.clientX - pointerStart.current;
+            pointerStart.current = null;
+            if (Math.abs(delta) < 45) return;
+            if (delta > 0) {
+              dir === "rtl" ? go(1) : go(-1);
+            } else {
+              dir === "rtl" ? go(-1) : go(1);
+            }
+          }}
+          onPointerCancel={() => {
+            pointerStart.current = null;
+          }}
+        >
+          <div
+            className="category-track"
+            style={{ transform: `translateX(${(dir === "rtl" ? 1 : -1) * activePage * 100}%)` }}
+          >
+            {pages.map((page, pageIndex) => (
+              <div className="category-page" key={pageIndex} aria-hidden={pageIndex !== activePage}>
+                {page.map((category) => (
+                  <Link
+                    href={`/benefits?category=${encodeURIComponent(category.key)}`}
+                    className="category-link"
+                    tabIndex={pageIndex === activePage ? 0 : -1}
+                    key={category.key}
+                  >
+                    <span className="category-icon-wrap">
+                      <category.icon aria-hidden="true" strokeWidth={1.65} />
+                    </span>
+                    <span className="category-label">{t(category.key)}</span>
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
+        </div>
+
+        {totalPages > 1 && (
+          <>
+            <button className="category-arrow category-arrow-previous" type="button" onClick={() => go(-1)} aria-label={t("nav.prev")}>
+              {dir === "rtl" ? <ChevronRight aria-hidden="true" /> : <ChevronLeft aria-hidden="true" />}
+            </button>
+            <button className="category-arrow category-arrow-next" type="button" onClick={() => go(1)} aria-label={t("nav.next")}>
+              {dir === "rtl" ? <ChevronLeft aria-hidden="true" /> : <ChevronRight aria-hidden="true" />}
+            </button>
+          </>
         )}
+
+        <div className="category-pagination" role="tablist" aria-label={lang === "ar" ? "مجموعات الفئات" : "Category groups"}>
+          {pages.map((_, pageIndex) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={pageIndex === activePage}
+              aria-label={`${t("nav.group")} ${pageIndex + 1}`}
+              className={pageIndex === activePage ? "is-active" : ""}
+              onClick={() => setActivePage(pageIndex)}
+              key={pageIndex}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

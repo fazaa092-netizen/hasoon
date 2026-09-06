@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import StudioSlider from "@/components/StudioSlider";
+import CategoryIcons from "@/components/CategoryIcons";
 import { useLang } from "@/contexts/LanguageContext";
 import { useOrder } from "@/contexts/OrderContext";
 import { MEMBERSHIPS, type MembershipTier } from "@/lib/data";
@@ -138,6 +139,7 @@ export default function Home() {
   return (
     <SiteLayout>
       <StudioSlider lang={lang} />
+      <CategoryIcons />
 
       <section className="journey-section" aria-labelledby="journey-title">
         <div className="container journey-layout">

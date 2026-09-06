@@ -221,6 +221,37 @@
   .studio-play-control:active { transform: scale(.96); }
   .studio-play-control svg { width: 17px; height: 17px; }
 
+  .category-rail { overflow: hidden; background: #f8f6f1; border-bottom: 1px solid rgba(18,33,46,.08); }
+  .category-shell { position: relative; min-height: 202px; display: grid; align-content: center; padding-block: 1.7rem 1.15rem; }
+  .category-viewport { overflow: hidden; margin-inline: clamp(3.4rem, 6vw, 5.2rem); padding-top: .15rem; touch-action: pan-y; }
+  .category-track { display: flex; transition: transform 420ms var(--ease-out); will-change: transform; }
+  .category-page { flex: 0 0 100%; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: start; gap: clamp(.7rem, 2.2vw, 2.4rem); }
+  .category-link { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .8rem; color: var(--ink); text-align: center; }
+  .category-icon-wrap {
+    width: clamp(4.6rem, 6vw, 5.25rem); height: clamp(4.6rem, 6vw, 5.25rem); display: grid; place-items: center;
+    border: 1px solid rgba(200,156,40,.23); border-radius: 50%; background: white;
+    box-shadow: 0 8px 22px -13px rgba(7,54,95,.34); transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  }
+  .category-icon-wrap svg { width: 29px; height: 29px; color: var(--blue); transition: color 180ms var(--ease-out); }
+  .category-label { max-width: 126px; color: #4a4d50; font-size: .69rem; font-weight: 620; line-height: 1.55; text-wrap: balance; }
+  .category-link:hover .category-icon-wrap { transform: translateY(-3px); border-color: rgba(200,156,40,.72); box-shadow: 0 14px 30px -16px rgba(157,116,17,.45); }
+  .category-link:hover .category-icon-wrap svg, .category-link:hover .category-label { color: var(--gold-dark); }
+  .category-arrow {
+    position: absolute; top: 43%; z-index: 2; width: 46px; height: 46px; display: grid; place-items: center;
+    transform: translateY(-50%); border: 1px solid rgba(200,156,40,.22); border-radius: 50%;
+    background: white; color: var(--ink); box-shadow: 0 8px 18px -11px rgba(7,54,95,.42);
+    transition: color 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .category-arrow:hover { color: var(--gold-dark); border-color: var(--gold); transform: translateY(-50%) scale(1.04); }
+  .category-arrow:active { transform: translateY(-50%) scale(.96); }
+  .category-arrow svg { width: 20px; height: 20px; }
+  .category-arrow-previous { inset-inline-start: clamp(.3rem, 2vw, 1.8rem); }
+  .category-arrow-next { inset-inline-end: clamp(.3rem, 2vw, 1.8rem); }
+  .category-pagination { display: flex; justify-content: center; align-items: center; gap: .4rem; margin-top: 1.25rem; }
+  .category-pagination button { position: relative; width: 16px; height: 20px; }
+  .category-pagination button::before { content: ""; position: absolute; top: 50%; left: 50%; width: 7px; height: 7px; border-radius: 99px; background: rgba(18,33,46,.18); transform: translate(-50%, -50%); transition: width 180ms var(--ease-out), background-color 180ms var(--ease-out); }
+  .category-pagination button.is-active::before { width: 24px; background: var(--gold); }
+
   .journey-section { background: var(--paper); border-bottom: 1px solid var(--line); }
   .journey-layout { display: grid; grid-template-columns: .62fr 1.38fr; gap: 4rem; padding-block: clamp(3rem, 5vw, 4.7rem); }
   .journey-heading > span { color: var(--gold-dark); font-size: .7rem; font-weight: 900; letter-spacing: .08em; }
@@ -381,6 +412,17 @@
   .studio-counter { font-size: .6rem; }
   .studio-active-title { font-size: .65rem; }
   .studio-play-control { width: 40px; height: 40px; }
+
+  .category-shell { min-height: 190px; padding-block: 1.45rem 1rem; }
+  .category-viewport { margin-inline: 2.7rem; }
+  .category-page { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .category-icon-wrap { width: 4.25rem; height: 4.25rem; }
+  .category-icon-wrap svg { width: 26px; height: 26px; }
+  .category-label { max-width: 92px; font-size: .62rem; }
+  .category-arrow { top: 42%; width: 42px; height: 42px; }
+  .category-arrow-previous { inset-inline-start: .35rem; }
+  .category-arrow-next { inset-inline-end: .35rem; }
+  .category-pagination { margin-top: 1rem; }
 
   .journey-layout { gap: 2rem; }
   .journey-list { grid-template-columns: 1fr; }
