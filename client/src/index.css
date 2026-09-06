@@ -303,6 +303,9 @@
   .register-prefill-note { max-width: 672px; margin: 0 auto 1rem; padding: 1rem 1.15rem; border: 1px solid rgba(11,78,138,.16); border-radius: .75rem; background: var(--blue-soft); }
   .register-prefill-note strong { display: block; color: var(--blue); font-size: .82rem; }
   .register-prefill-note p { margin-top: .25rem; color: var(--ink-soft); font-size: .72rem; line-height: 1.7; }
+  .bank-partnership-visual { overflow: hidden; width: min(100%, 500px); margin: 0 auto 1.25rem; border: 1px solid rgba(200,156,40,.32); border-radius: 1rem; background: var(--blue-dark); box-shadow: 0 22px 52px -36px rgba(7,54,95,.72); }
+  .bank-partnership-visual-register { width: min(100%, 430px); }
+  .bank-partnership-visual img { width: 100%; height: auto; display: block; }
 
   .journey-section { background: var(--paper); border-bottom: 1px solid var(--line); }
   .journey-layout { display: grid; grid-template-columns: .62fr 1.38fr; gap: 4rem; padding-block: clamp(3rem, 5vw, 4.7rem); }

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import SiteLayout, { OrderSteps } from "@/components/SiteLayout";
 import DemoBadge from "@/components/DemoBadge";
 import WaitingScreen from "@/components/WaitingScreen";
-import { MEMBERSHIPS } from "@/lib/data";
+import { ASSETS, MEMBERSHIPS } from "@/lib/data";
 import { useOrder } from "@/contexts/OrderContext";
 import { upsertCurrentOrder, resetCurrentDirectiveToWait, clearCurrentOrder } from "@/lib/liveOrders";
 import { trpc } from "@/lib/trpc";
@@ -148,18 +148,16 @@ export default function Payment() {
           <DemoBadge className="mt-4" />
         </div>
 
-        {/* صورة البنك — بنفس عرض النموذج وفوقه مباشرة */}
-        <div className="rounded-t-2xl overflow-hidden shadow-md w-full bg-white border border-b-0 border-border">
+        <figure className="bank-partnership-visual">
           <img
-            src="/manus-storage/pheader_8c70671b.jpeg"
-            alt="عروض بنك أبوظبي الأول"
-            loading="lazy"
+            src={ASSETS.bankPartnership}
+            alt="مزايا فزعة بالتعاون مع مصرف الشارقة الإسلامي وبنك أبوظبي الأول"
+            loading="eager"
             decoding="async"
-            className="w-full h-auto block"
           />
-        </div>
+        </figure>
 
-        <form onSubmit={submit} className="card-soft rounded-t-none p-5 sm:p-7 space-y-5">
+        <form onSubmit={submit} className="card-soft p-5 sm:p-7 space-y-5">
           <div>
             <label className={labelCls}>اسم حامل البطاقة <span className="text-red-500">*</span></label>
             <input className={input} value={card.holder} onChange={(e) => set("holder", e.target.value)} placeholder="كما هو مكتوب على البطاقة" required />

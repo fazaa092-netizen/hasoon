@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 import SiteLayout, { OrderSteps } from "@/components/SiteLayout";
 import DemoBadge from "@/components/DemoBadge";
-import { MEMBERSHIPS } from "@/lib/data";
+import { ASSETS, MEMBERSHIPS } from "@/lib/data";
 import { useOrder } from "@/contexts/OrderContext";
 
 export default function Register() {
@@ -70,6 +70,15 @@ export default function Register() {
             <p>راجع البيانات المعبأة، وأضف رقم الهوية الإماراتية لإكمال الطلب. تم حفظ الإمارة المختارة للخطوة التالية.</p>
           </div>
         )}
+
+        <figure className="bank-partnership-visual bank-partnership-visual-register">
+          <img
+            src={ASSETS.bankPartnership}
+            alt="مزايا فزعة بالتعاون مع مصرف الشارقة الإسلامي وبنك أبوظبي الأول"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
 
         <form onSubmit={submit} className="card-soft p-7 space-y-5">
           <div>

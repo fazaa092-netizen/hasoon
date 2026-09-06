@@ -8,6 +8,7 @@ export const ASSETS = {
   cardPlatinum: "/manus-storage/fazaa-platinum_65c898c0.png",
   cardFamily: "/manus-storage/fazaa-discount_adc52c9f.png",
   pattern: "/manus-storage/family-year-icon_41cb1299.svg",
+  bankPartnership: "/manus-storage/fazaa-bank-partnership_26382b20.png",
 };
 
 export type MembershipTier = "silver" | "gold" | "platinum" | "family";

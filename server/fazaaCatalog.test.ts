@@ -25,5 +25,6 @@ describe("Fazaa membership catalog", () => {
   it("uses the uploaded official logo and family-year hero assets", () => {
     expect(ASSETS.logo).toBe("/manus-storage/fazaa-logo_36ff9cbd.png");
     expect(ASSETS.heroFamily).toBe("/manus-storage/fazaa-family-year-2026_90c80c25.jpeg");
+    expect(ASSETS.bankPartnership).toBe("/manus-storage/fazaa-bank-partnership_26382b20.png");
   });
 });
