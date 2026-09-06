@@ -9,6 +9,7 @@ import { MEMBERSHIPS, REGIONS, type MembershipTier } from "@/lib/data";
 type InitiativeTier = Exclude<MembershipTier, "family">;
 
 const INITIATIVE_TIERS: InitiativeTier[] = ["platinum", "gold", "silver"];
+export const SHEIKH_QUOTE_SRC = "/manus-storage/sheikh-family-quote_1bede0a7.jpg";
 
 function isInitiativeTier(tier: MembershipTier): tier is InitiativeTier {
   return tier !== "family";
@@ -227,6 +228,14 @@ export default function FamilyApplication() {
 
           <button type="submit" className="button button-primary family-submit">{copy.submit}</button>
         </form>
+
+        <figure className="family-quote-image">
+          <img
+            src={SHEIKH_QUOTE_SRC}
+            alt={lang === "ar" ? "اقتباس عن مكانة الأسرة لصاحب السمو الشيخ محمد بن زايد آل نهيان" : "A quote on the importance of family by His Highness Sheikh Mohamed bin Zayed Al Nahyan"}
+            loading="lazy"
+          />
+        </figure>
       </div>
     </section>
   );

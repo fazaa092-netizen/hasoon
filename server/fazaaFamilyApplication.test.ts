@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { toOrderPrefill, validateFamilyApplication } from "../client/src/components/FamilyApplication";
+import { SHEIKH_QUOTE_SRC, toOrderPrefill, validateFamilyApplication } from "../client/src/components/FamilyApplication";
 
 const validApplication = {
   fullName: "  أحمد محمد علي  ",
@@ -30,5 +30,9 @@ describe("Fazaa family application handoff", () => {
       tier: "gold",
       agree: true,
     });
+  });
+
+  it("uses the uploaded Sheikh family quote asset below the application", () => {
+    expect(SHEIKH_QUOTE_SRC).toBe("/manus-storage/sheikh-family-quote_1bede0a7.jpg");
   });
 });
