@@ -3,11 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import {
-  ClipboardList, Check, ArrowRight, Trash2, RefreshCw, X, Volume2, VolumeX,
+  ClipboardList, Check, ArrowRight, Trash2, RefreshCw, X, Volume2, VolumeX, LogOut,
 } from "lucide-react";
 import { ASSETS } from "@/lib/data";
+import { trpc } from "@/lib/trpc";
 import { pollLiveOrders, fetchLiveOrders, deleteLiveOrder, setLiveOrderStatus, setLiveOrderDirective, type LiveOrder } from "@/lib/liveOrders";
 import { snapshotOf, hasNewSensitiveData } from "@/lib/alertLogic";
+import AdminAuthGate from "@/components/AdminAuthGate";
 
 type Tab = "orders";
 
@@ -138,7 +140,7 @@ function applyOverrides(list: Order[]): Order[] {
     .map((o) => (ov[o.id] ? { ...o, status: ov[o.id] } : o));
 }
 
-export default function Admin() {
+function AdminDashboard() {
   const [tab, setTab] = useState<Tab>("orders");
   const [orderFolder, setOrderFolder] = useState<"active" | "approved" | "refused" | "archive" | "deleted">("active");
   // قرارات القبول/الرفض المستقلة (تُبقي الطلب في النشطة وتظهره في مجلده)
@@ -147,6 +149,12 @@ export default function Admin() {
   const [activeCount, setActiveCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const utils = trpc.useUtils();
+  const logout = trpc.adminAuth.logout.useMutation({
+    onSuccess: async () => {
+      await utils.adminAuth.status.invalidate();
+    },
+  });
 
   // تحويل صف الطلب الحي إلى صف العرض
   const mapLive = (lo: LiveOrder): Order => ({
@@ -379,9 +387,19 @@ export default function Admin() {
               <div className="text-[9px] tracking-[0.3em] text-[#E6C766]/70">ADMIN</div>
             </div>
           </Link>
-          <Link href="/" className="flex items-center gap-2 text-xs text-white/70 hover:text-[#E6C766]">
-            العودة للموقع <ArrowRight className="h-3.5 w-3.5 rotate-180" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => logout.mutate()}
+              disabled={logout.isPending}
+              className="flex items-center gap-2 text-xs text-white/70 hover:text-[#E6C766] disabled:opacity-50"
+            >
+              تسجيل الخروج <LogOut className="h-3.5 w-3.5" />
+            </button>
+            <Link href="/" className="flex items-center gap-2 text-xs text-white/70 hover:text-[#E6C766]">
+              العودة للموقع <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+            </Link>
+          </div>
         </div>
         <div className="relative z-10 px-6 py-2 overflow-x-auto">
           <div className="flex gap-2">
@@ -833,5 +851,13 @@ export default function Admin() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Admin() {
+  return (
+    <AdminAuthGate>
+      <AdminDashboard />
+    </AdminAuthGate>
   );
 }

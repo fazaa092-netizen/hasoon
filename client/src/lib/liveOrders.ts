@@ -62,7 +62,11 @@ export function clearCurrentOrder() {
 }
 
 function genId(): string {
-  return "L-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return `L-${crypto.randomUUID()}`;
+  }
+  const fallback = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
+  return `L-${fallback}`.slice(0, 40);
 }
 
 function formatDate(d: Date): string {
@@ -211,7 +215,7 @@ export async function deleteLiveOrder(id: string): Promise<void> {
 export async function resetCurrentDirectiveToWait(): Promise<void> {
   const id = getCurrentOrderId();
   if (!id) return;
-  await trpcVanilla.orders.direct.mutate({ publicId: id, directive: "wait" });
+  await trpcVanilla.orders.resetDirective.mutate({ publicId: id });
 }
 
 /* ====== إشعار داخلي للتبويب الحالي عند أي تغيير محلي ====== */
