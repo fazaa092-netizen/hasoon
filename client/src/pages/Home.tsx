@@ -2,8 +2,6 @@ import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
-  ArrowUpLeft,
-  BadgeCheck,
   BookOpen,
   Building2,
   CarFront,
@@ -13,9 +11,9 @@ import {
   ShieldCheck,
   Sparkles,
   Ticket,
-  UsersRound,
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import StudioSlider from "@/components/StudioSlider";
 import { useLang } from "@/contexts/LanguageContext";
 import { useOrder } from "@/contexts/OrderContext";
 import { MEMBERSHIPS, type MembershipTier } from "@/lib/data";
@@ -139,49 +137,7 @@ export default function Home() {
 
   return (
     <SiteLayout>
-      <section className="hero-section">
-        <div className="container hero-grid">
-          <div className="hero-copy fazaa-reveal">
-            <div className="initiative-badge">
-              <span className="initiative-badge-mark" aria-hidden="true" />
-              {copy.badge}
-            </div>
-            <h1 className="hero-title">
-              <span>{copy.titleTop}</span>
-              <strong>{copy.titleBottom}</strong>
-            </h1>
-            <p className="hero-lead">{copy.lead}</p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#memberships">
-                {copy.primary}
-                <ArrowLeft className="h-4 w-4 rtl-icon" aria-hidden="true" />
-              </a>
-              <Link className="button button-quiet" href="/benefits">
-                {copy.secondary}
-                <ArrowUpLeft className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-            <div className="hero-assurances" aria-label={lang === "ar" ? "معلومات المبادرة" : "Initiative information"}>
-              <span><UsersRound aria-hidden="true" />{copy.support}</span>
-              <span><BadgeCheck aria-hidden="true" />{copy.free}</span>
-            </div>
-          </div>
-
-          <div className="hero-visual fazaa-reveal" style={{ animationDelay: "110ms" }}>
-            <div className="hero-image-frame">
-              <img
-                src="/manus-storage/fazaa-family-year-2026_90c80c25.jpeg"
-                alt={lang === "ar" ? "مبادرة فزعة لعام الأسرة 2026" : "Fazaa Family Year Initiative 2026"}
-                fetchPriority="high"
-              />
-            </div>
-            <div className="collaboration-note">
-              <img src="/manus-storage/family-year-icon_41cb1299.svg" alt="" aria-hidden="true" />
-              <span>{copy.collaboration}</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <StudioSlider lang={lang} />
 
       <section className="journey-section" aria-labelledby="journey-title">
         <div className="container journey-layout">
