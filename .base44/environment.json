@@ -1,0 +1,33 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "JWT_SECRET",
+      "description": "HMAC secret used to sign admin session tokens and user session JWTs. Any random string 32+ characters. A development placeholder is bundled; set a real value for production.",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": true
+    },
+    {
+      "name": "OAUTH_SERVER_URL",
+      "description": "Manus OAuth server base URL. Optional — needed only for OAuth login flow.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_APP_ID",
+      "description": "Manus application ID used as OAuth clientId. Optional — needed only for OAuth login flow.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "BUILT_IN_FORGE_API_URL",
+      "description": "Forge API base URL for S3 storage proxy. Optional — needed only for file uploads.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "BUILT_IN_FORGE_API_KEY",
+      "description": "Forge API key for S3 storage proxy. Optional — needed only for file uploads.",
+      "requiredAtBoot": false
+    }
+  ]
+}
