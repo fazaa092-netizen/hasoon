@@ -1,52 +1,46 @@
-# مواصفات هوية فزعة الرقمية
+# GitHub Repository Replica — Brand Specification
 
-## نطاق الاستخدام
+## Scope
 
-تخدم هذه المواصفات موقع **مبادرة فزعة لعام الأسرة 2026**. يعتمد التصميم لغة مؤسسية دافئة تحافظ على حضور شعار فزعة الأزرق والذهبي، وتضع الأسرة والخدمة العامة في مركز التجربة. جميع المواد البصرية المستخدمة أصول فعلية من فزعة أو من حملة عام الأسرة وليست رسومات CSS بديلة.
+This implementation recreates the public repository view for **fazaa092-netizen/hasoon**. It preserves the information-dense, utility-first visual language of GitHub while providing responsive layouts and functional UI states for search, branch selection, code actions, repository actions, and mobile navigation.
 
-## الأصول المعتمدة
+## Approved assets
 
-| الأصل | مسار WebDev | الاستخدام |
+| Asset | Local path | Use |
 |---|---|---|
-| شعار فزعة | `/manus-storage/fazaa-logo_36ff9cbd.png` | الترويسة والتذييل |
-| حملة عام الأسرة 2026 | `/manus-storage/fazaa-family-year-2026_90c80c25.jpeg` | صورة البطل الرئيسية |
-| أيقونة عام الأسرة | `/manus-storage/family-year-icon_41cb1299.svg` | ملاحظة التعاون في البطل |
-| مجموعة بطاقات فزعة | `/manus-storage/fazaa-card-lineup_9046a5b7.webp` | قسم المبادرة والمنتج |
-| البطاقة البلاتينية | `/manus-storage/fazaa-platinum_65c898c0.png` | مستكشف العضويات وصفحة العضويات |
-| البطاقة الذهبية | `/manus-storage/fazaa-gold_e088ab0e.png` | مستكشف العضويات وصفحة العضويات |
-| البطاقة الفضية | `/manus-storage/fazaa-silver_95b6e4e7.png` | مستكشف العضويات وصفحة العضويات |
-| عضوية الخصومات | `/manus-storage/fazaa-discount_adc52c9f.png` | عضوية الأسر المقيمة |
+| Official white GitHub Invertocat | `/assets/github-invertocat-white.svg` | Global header brand mark |
+| fazaa092-netizen avatar | `/assets/fazaa092-netizen-avatar.png` | Latest commit and contributor list |
+| base44-builder avatar | `/assets/base44-builder-avatar.png` | Contributor list |
 
-تبقى النسخ المحلية الأصلية خارج مجلد المشروع في `/home/ubuntu/webdev-static-assets/fazaa-showcase/` وفق متطلبات نشر WebDev.
+The GitHub logo was sourced from the official [GitHub Brand Toolkit](https://brand.github.com/foundations/logo). No effects, recoloring, stretching, or custom redraws are applied.
 
-## استديو اللافتات
+## Design read
 
-تعتمد مقدمة الصفحة الرئيسية على 13 لافتة عريضة رفعها المستخدم، وحُولت إلى WebP بجودة 86 مع الحفاظ على الأبعاد الأصلية 1920×480. تُدار المسارات والترتيب والتسميات ثنائية اللغة مركزيًا في `client/src/lib/studio.ts`، بينما يحتفظ المكوّن `client/src/components/StudioSlider.tsx` بالتشغيل التلقائي والإيقاف والتنقل والسحب ودعم لوحة المفاتيح. توجد النسخ المحلية المحسنة في `/home/ubuntu/webdev-static-assets/fazaa-showcase/studio/` ولا تُنسخ إلى مجلد `client/public`.
+The artifact is a **desktop-first repository interface** intended for close viewing on laptop and desktop screens. The visual language is GitHub's compact product UI. The work is a faithful recreation rather than a redesign: visual variance is 1/10, motion intensity is 2/10, information density is 9/10, asset dependence is 4/10, and brand fidelity is 10/10.
 
-يوضع أسفل الاستديو شريط فئات عاجي يعرض 18 فئة في ثلاث مجموعات على سطح المكتب وست مجموعات على الهاتف. يستخدم المكوّن `client/src/components/CategoryIcons.tsx` دوائر بيضاء وأيقونات خطية زرقاء وأسهمًا منفصلة ومؤشرًا ذهبيًا، ويدعم السحب ولوحة المفاتيح والروابط المباشرة إلى صفحة المزايا.
+## Design tokens
 
-بعد شريط الفئات تظهر صورة مبادرة الأسرة الأصلية، ثم نموذج `client/src/components/FamilyApplication.tsx`. يجمع النموذج الاسم ورقم الهاتف والبريد والإمارة وفئة البطاقة والإقرار، ويحفظها في `OrderContext` قبل الانتقال إلى `/register?from=family`. تبدأ صفحة التسجيل بهذه القيم، وتضيف رقم الهوية فقط قبل متابعة المسار الأصلي إلى العنوان ثم المراجعة والدفع والتأكيد.
-
-تستخدم الترويسة خلفية ذهبية مع شريط علوي أزرق رفيع ونص داكن لضمان التباين. تظهر بطاقات المبادرة الثلاث في صف مضغوط على سطح المكتب ومسار أفقي قابل للسحب على الهاتف. يستخدم اقتباس الأسرة الأصل `/manus-storage/sheikh-family-quote_1bede0a7.jpg` بعد زر تقديم الطلب وقبل التذييل، ولا تُعرض بعده أقسام تسويقية إضافية.
-
-تستخدم صفحتا التسجيل والدفع أصل شراكة فزعة مع مصرف الشارقة الإسلامي وبنك أبوظبي الأول من `/manus-storage/fazaa-bank-partnership_26382b20.png`. يظهر الأصل كاملًا بنسبة 1:1 فوق النموذج، بحد أقصى 430 بكسل في التسجيل و500 بكسل في الدفع، ويحل محل أصل الدفع السابق المكسور.
-
-## نظام التصميم
-
-| القرار | القيمة |
+| Decision | Value |
 |---|---|
-| الأزرق الرئيسي | `#0B4E8A` |
-| الأزرق العميق | `#07365F` |
-| الذهبي | `#C89C28` |
-| العاجي | `#F7F1E5` |
-| الحبر | `#12212E` |
-| خط العناوين | Alexandria، بأوزان 600–800 |
-| خط النصوص | Noto Sans Arabic، بأوزان 400–700 |
-| وحدة المسافة | 8px |
-| زوايا الأسطح | 18px |
-| زوايا الحقول | 12px |
-| حركة الدخول | 360–620ms باستخدام `cubic-bezier(0.23, 1, 0.32, 1)` |
+| Header | `#010409` |
+| Canvas | `#FFFFFF` |
+| Subtle surface | `#F6F8FA` |
+| Primary text | `#1F2328` |
+| Secondary text | `#656D76` |
+| Border | `#D0D7DE` |
+| Link | `#0969DA` |
+| Success/action | `#1F883D` |
+| Active tab | `#FD8C73` |
+| Typeface | Native system stack matching GitHub UI |
+| Spacing unit | 4 px with 8/12/16/24/32 px groupings |
+| Radius | 6 px controls and panels; 8–12 px popovers |
+| Shadows | Reserved for elevated menus and dialogs only |
+| Motion | 120–180 ms using `cubic-bezier(0.23, 1, 0.32, 1)` |
 
-## قواعد الاستخدام
+## Responsive behavior
 
-يستخدم الذهبي للتأكيد والانتقال بين المراحل وليس كلون نص أساسي طويل. يستخدم الأزرق للأفعال الرئيسية والعناوين ذات الأهمية. لا تُضاف تدرجات متعددة الألوان أو مؤثرات نيون أو شعارات شركاء غير موثقة. يجب عرض المنتجات بصورها الحقيقية فقط. تُحافظ جميع الشاشات على دعم الاتجاه من اليمين إلى اليسار، وأهداف لمس لا تقل عن 44 بكسل، وحالة واضحة للتركيز، ومسار بديل للحركة عند تفعيل `prefers-reduced-motion`.
+At tablet widths, the global navigation becomes a menu and repository controls reorganize without changing visual vocabulary. Below 860 px, the repository sidebar stacks below the file browser. Below 680 px, low-priority commit metadata and file messages are removed while names and update ages remain visible. Repository tabs remain horizontally scrollable and all principal touch targets remain at least 40 px tall.
+
+## Interaction states
+
+All controls expose hover, active, focus-visible, and expanded states. Search opens through both the header control and the `/` keyboard shortcut. The branch and Code menus are keyboard-dismissable with Escape. Repository Star, Notifications, Fork, code-copy, and appearance controls provide visible toast feedback. File and metadata links lead to the real public repository.
